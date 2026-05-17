@@ -8,17 +8,31 @@ class Club
       string category;
       string coordinator;       
 };
+
+class Student
+{
+  public:
+      string studentName;
+      string usn;
+      string branch;
+      string interestedclub;
+};
+      
 int main()
 {
   Club c;
+  Student s;
   int choice;
 
   while(true)
   {
     cout << "\n===== CLUBHUB MENU =====\n";
     cout << "1. Add Club\n";
-    cout << "2. Display Clubs\n";
-    cout << "3. Exit\n";
+    cout << "2. Display Club\n";
+    cout << "3. Register Student\n";
+    cout << "4. Display Student\n";
+    cout << "5. Exit\n";
+    
 
     cout << "Enter Choice: ";
     cin >> choice;
@@ -38,13 +52,39 @@ int main()
 
 
      }
+
     else if (choice == 2)
     {
         cout << "\nClun Name: " << c.clubName << endl;
         cout << "Category: " << c.category << endl;
         cout << "Coordinator: " << c.coordinator << endl;
     }
-    else if  (choice == 3)
+
+    else if (choice == 3)
+    {
+      cout <<  "Enter Student Name: ";
+      cin >> s.studentName;
+
+      cout << "Enter USN: ";
+      cin >> s.usn;
+
+      cout  << "Enter Branch: ";
+      cin >> s.branch;
+
+      cout << "Entetr Interested Club: ";
+      cin >> s.interestedclub;
+
+      cout << "Student Registered Successfully!\n";
+    }
+
+    else if(choice == 4)
+    {
+      cout  << "\nStudent Name: " << s.studentName << endl;
+      cout << "USN: " << s.usn << endl;
+      cout << "Branch: " << s.branch << endl;
+      cout << "Interested Club: " << s.interestedclub << endl;
+    }
+    else if  (choice == 5)
     {
        cout << "Exiting Program...";
         break;
