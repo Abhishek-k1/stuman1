@@ -22,6 +22,7 @@ int main()
 {
   Club c;
   Student s;
+  string searchClub;
   int choice;
 
   while(true)
@@ -31,7 +32,8 @@ int main()
     cout << "2. Display Club\n";
     cout << "3. Register Student\n";
     cout << "4. Display Student\n";
-    cout << "5. Exit\n";
+    cout << "5. Search Club\n";
+    cout << "6. Exit\n";
     
 
     cout << "Enter Choice: ";
@@ -71,7 +73,7 @@ int main()
       cout  << "Enter Branch: ";
       cin >> s.branch;
 
-      cout << "Entetr Interested Club: ";
+      cout << "Enter Interested Club: ";
       cin >> s.interestedclub;
 
       cout << "Student Registered Successfully!\n";
@@ -84,7 +86,22 @@ int main()
       cout << "Branch: " << s.branch << endl;
       cout << "Interested Club: " << s.interestedclub << endl;
     }
-    else if  (choice == 5)
+
+    else if(choice == 5)
+    {
+      cout << "Enter club Name to Search: ";
+      cin >> searchClub;
+
+      if(searchClub == c.clubName)
+      {
+        cout << "\nClub Found!\n";
+
+        cout << "Club Name: " << c.clubName << endl;
+        cout << "Category: " << c.category << endl;
+        cout << "Coordinator: " << c.coordinator << endl;
+      }
+    }
+    else if  (choice == 6)
     {
        cout << "Exiting Program...";
         break;
