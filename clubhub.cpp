@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+
 using namespace std;
 
 class Club
@@ -41,6 +43,14 @@ int main()
 
     if(choice == 1)
     {
+      ofstream file("clubs.txt", ios::app);
+
+      file << c.clubName << " ";
+      file << c.category << " ";
+      file << c.coordinator << endl;
+
+      file.close();
+
       cout << "Enter Club Name: ";
       cin >> c.clubName;
 
@@ -57,10 +67,19 @@ int main()
 
     else if (choice == 2)
     {
-        cout << "\nClun Name: " << c.clubName << endl;
+      ifstream file("clubs.txt");
+
+      string name, category, coordinator;
+
+      while(file >> name >> category >> coordinator)
+      {
+
+        cout << "\nClub Name: " << c.clubName << endl;
         cout << "Category: " << c.category << endl;
         cout << "Coordinator: " << c.coordinator << endl;
     }
+    file.close();
+  }
 
     else if (choice == 3)
     {
