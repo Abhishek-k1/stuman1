@@ -19,12 +19,22 @@ class Student
       string branch;
       string interestedclub;
 };
+
+class Event
+{
+  public:
+      string eventName;
+      string venue;
+      string timing;
+      string clubName;
+};
       
 int main()
 {
   Club c;
   Student s;
   string searchClub;
+  Event e;
   int choice;
 
   while(true)
@@ -35,7 +45,9 @@ int main()
     cout << "3. Register Student\n";
     cout << "4. Display Student\n";
     cout << "5. Search Club\n";
-    cout << "6. Exit\n";
+    cout << "6. Add Event\n";
+    cout << "7. Display Events\n";
+    cout << "8. Exit\n";
     
 
     cout << "Enter Choice: ";
@@ -43,14 +55,6 @@ int main()
 
     if(choice == 1)
     {
-      ofstream file("clubs.txt", ios::app);
-
-      file << c.clubName << " ";
-      file << c.category << " ";
-      file << c.coordinator << endl;
-
-      file.close();
-
       cout << "Enter Club Name: ";
       cin >> c.clubName;
 
@@ -59,6 +63,16 @@ int main()
 
       cout  << "Enter Coordinator Name: ";
       cin >> c.coordinator;
+
+      ofstream file("clubs.txt", ios::app);
+
+      file << c.clubName << " ";
+      file << c.category << " ";
+      file << c.coordinator << endl;
+
+      file.close();
+
+
 
       cout << "Club Added Successfully!\n";
 
@@ -74,9 +88,9 @@ int main()
       while(file >> name >> category >> coordinator)
       {
 
-        cout << "\nClub Name: " << c.clubName << endl;
-        cout << "Category: " << c.category << endl;
-        cout << "Coordinator: " << c.coordinator << endl;
+        cout << "\nClub Name: " << name << endl;
+        cout << "Category: " << category << endl;
+        cout << "Coordinator: " << coordinator << endl;
     }
     file.close();
   }
@@ -119,8 +133,55 @@ int main()
         cout << "Category: " << c.category << endl;
         cout << "Coordinator: " << c.coordinator << endl;
       }
+      else
+      {
+        cout << "Club Not Found!\n";
+      }
     }
-    else if  (choice == 6)
+      else if(choice == 6)
+      {
+        cout << "Enter Event Name: ";
+        cin >> e.eventName;
+
+        cout << "Enter Venue: ";
+        cin >> e.venue;
+
+        cout << "Enter Timing: ";
+        cin >> e.timing;
+
+        cout << "Enter Club Name: ";
+        cin >> e.clubName;
+
+        ofstream file("events.txt", ios::app);
+
+        file << e.eventName << " ";
+        file << e.venue << " ";
+        file << e.timing << " ";
+        file << e.clubName << endl;
+
+        file.close();
+
+        cout << "Event Added Successfully!\n";
+      }
+
+      else if(choice == 7)
+      {
+        ifstream file("events.txt");
+
+        string eventName, venue, timing, clubName;
+
+        while(file >> eventName >> venue >> timing >> clubName)
+        {
+          cout << "\nEvent Name: " << eventName << endl;
+          cout << "Venue: " << venue << endl;
+          cout << "Timing: " << timing << endl;
+          cout << "club Name: " << clubName << endl;
+        }
+
+        file.close();
+      
+    }
+    else if  (choice == 8)
     {
        cout << "Exiting Program...";
         break;
