@@ -47,7 +47,8 @@ int main()
     cout << "5. Search Club\n";
     cout << "6. Add Event\n";
     cout << "7. Display Events\n";
-    cout << "8. Exit\n";
+    cout << "8. Admin Menu\n";
+    cout << "9. Exit\n";
     
 
     cout << "Enter Choice: ";
@@ -181,7 +182,52 @@ int main()
         file.close();
       
     }
-    else if  (choice == 8)
+
+    else if(choice == 8)
+    {
+      int adminChoice;
+
+      cout << "\n===== ADMIN MENU =====\n";
+      cout << "1. View Clubs\n";
+      cout << "2. View Students\n";
+      cout << "3. Remove Club\n";
+      cout << "4. Back\n";
+
+      cout << "Enter Choice: ";
+      cin >> adminChoice;
+
+      if(adminChoice == 1)
+      {
+        ifstream file("clubs.txt");
+
+        string name, category, coordinator;
+
+        while(file >> name >> category >> coordinator)
+        {
+          cout << "\nClub Name: " << name << endl;
+          cout << "Category: " << category <<  endl;
+          cout << "Coordinator: " << coordinator << endl;
+        }
+
+        file.close();
+      }
+        else if(adminChoice == 2)
+        {
+          cout << "\nStudent Name: " << s.studentName << endl;
+          cout << "USN: " << s.usn << endl;
+          cout << "Branch: " << s.branch << endl;
+          cout << "Interested Club: " << s.interestedclub << endl;
+        }
+        else if(adminChoice == 3)
+        {
+          cout << "Remove Club Feature Coming Soon!\n";
+        }
+        else if(adminChoice == 4)
+        {
+          cout <<  "Returning to Main Menu...\n";
+        }
+    }
+    else if  (choice == 9)
     {
        cout << "Exiting Program...";
         break;
