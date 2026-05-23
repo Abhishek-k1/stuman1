@@ -1,5 +1,6 @@
 #include <iostream>    // For cout, cin
 #include <fstream>    // For file handling
+#include <vector>
 
 using namespace std;
 
@@ -31,11 +32,11 @@ public:
 
 int main()
 {
-  Club c;             // Object of Club class
-  Student s;          // object of student class
+  vector<Club> clubs;             // Object of Club class
+  vector<Student> students;          // object of student class
   string searchClub;  // variable for searching club
-  Event e;            // Object  of Event class
-  int choice;         // Stoes menu choice
+  vector<Event> events;            // Object  of Event class
+  int choice;         // Store menu choice
 
   while (true)
   {
@@ -57,6 +58,8 @@ int main()
     // ADD CLUB FEATURE
     if (choice == 1)
     {
+       Club c;
+
       cout << "Enter Club Name: ";
       cin.ignore();                  // Clears newline from buffer
       getline(cin, c.clubName);      // Takes full line input
@@ -68,13 +71,7 @@ int main()
       cin.ignore();
       getline(cin, c.coordinator);
 
-      ofstream file("clubs.txt", ios::app);
-
-      file << c.clubName << " ";
-      file << c.category << " ";
-      file << c.coordinator << endl;
-
-      file.close();    // Close file
+      clubs.push_back(c);
 
       cout << "Club Added Successfully!\n";
     }
@@ -82,31 +79,23 @@ int main()
     // Display CLUB FEATURE
     else if (choice == 2)
     {
-      ifstream file("clubs.txt");    // Opens file for reading
+        for(int i = 0; i < clubs.size(); i++)
+        {
+          cout << "\nClub Name: "
+               << clubs[i].clubName << endl;
 
-    // Checks if file exists
-      if (!file)
-      {
-        cout << "No Club Data Found!\n";
-      }
-      string name, category, coordinator;
+          cout << "Category: "
+               << clubs[i].category << endl;
 
-    // Reads data from file
-      while (file >> name >> category >> coordinator)
-      {
-
-        cout << "\n==================================\n";
-        cout << "\nClub Name: " << name << endl;
-        cout << "Category: " << category << endl;
-        cout << "Coordinator: " << coordinator << endl;
-        cout << "===================================\n";
-      }
-      file.close();
+          cout << "Coordinator:  "
+               << clubs[i].coordinator << endl;
+        }
     }
 
   // STUDENT REGISTRATION
     else if (choice == 3)
     {
+      Student s;
       cout << "Enter Student Name: ";
       cin.ignore();
       getline(cin, s.studentName);
@@ -121,35 +110,59 @@ int main()
       cout << "Enter Interested Club: ";
       getline(cin, s.interestedclub);
 
+      students.push_back(s);
+
       cout << "Student Registered Successfully!\n";
     }
 
     // DISPLAY STUDENT DETAILS
     else if (choice == 4)
     {
-      cout << "\nStudent Name: " << s.studentName << endl;
-      cout << "USN: " << s.usn << endl;
-      cout << "Branch: " << s.branch << endl;
-      cout << "Interested Club: " << s.interestedclub << endl;
+      for(int i = 0; i < students.size(); i++)
+      {
+         cout << "\nStudent Name: " 
+               << students[i].studentName << endl;
+
+         cout << "USN: "
+               << students[i].usn << endl;
+
+         cout << "Branch: " 
+               << students[i].branch << endl;
+
+         cout << "Interested Club: " 
+              << students[i].interestedclub << endl;
     }
+  }
 
     // SEARCH CLUB FEATURE
     else if (choice == 5)
     {
+      bool found = false;
+
       cout << "Enter club Name to Search: ";
       cin.ignore();
       getline(cin, searchClub);
 
-    // Compares searched club with storeed club
-      if (searchClub == c.clubName)
+      for(int i = 0; i < clubs.size(); i++)
+      {
+      if (searchClub == clubs[i].clubName)
       {
         cout << "\nClub Found!\n";
 
-        cout << "Club Name: " << c.clubName << endl;
-        cout << "Category: " << c.category << endl;
-        cout << "Coordinator: " << c.coordinator << endl;
-      }
-      else
+        cout << "Club Name: "
+             << clubs[i].clubName << endl;
+
+        cout << "Category: " 
+             << clubs[i].category << endl;
+
+        cout << "Coordinator: " 
+             << clubs[i].coordinator << endl;
+        
+             found = true;
+
+            }
+          }
+          if(found == false)
       {
         cout << "Club Not Found!\n";
       }
@@ -158,6 +171,9 @@ int main()
     // ADD EVENT FEATURE
     else if (choice == 6)
     {
+
+      Event e;
+
       cout << "Enter Event Name: ";
       cin.ignore();
       getline(cin, e.eventName);
@@ -180,6 +196,8 @@ int main()
       file << e.clubName << endl;
 
       file.close();
+
+      events.push_back(e);
 
       cout << "Event Added Successfully!\n";
     }
@@ -237,12 +255,21 @@ int main()
       // VIEW STUDENTS
       else if (adminChoice == 2)
       {
-        cout << "\nStudent Name: " << s.studentName << endl;
-        cout << "USN: " << s.usn << endl;
-        cout << "Branch: " << s.branch << endl;
-        cout << "Interested Club: " << s.interestedclub << endl;
-      }
+        for(int i = 0; i < students.size(); i++)
+        {
+          cout << "\nStudent Name: "
+               << students[i].studentName << endl;
 
+        cout << "USN: " 
+             << students[i].usn << endl;
+
+        cout << "Branch: " 
+            << students[i].branch << endl;
+            
+        cout << "Interested Club: "
+             << students[i].interestedclub << endl;
+      }
+      }
       // REMOVE CLUB PLACEHOLDER
       else if (adminChoice == 3)
       {
