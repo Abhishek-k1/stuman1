@@ -29,6 +29,9 @@ public:
   string timing;     // Event timing
   string clubName;   // Related club name
 };
+  string adminUsername = "admin";
+  string adminPassword = "1234";
+
 
 int main()
 {
@@ -224,6 +227,21 @@ int main()
     // ADMIN MENU
     else if (choice == 8)
     {
+      string username;
+      string password;
+
+      cout << "Enter Username: ";
+      cin >> username;
+
+      cout << "Enter Password: ";
+      cin >> password;
+   
+      if(username == adminUsername &&
+         password == adminPassword)
+      {
+        cout << "\nLogin Successful!\n";
+      
+      
       int adminChoice;
 
       cout << "\n===== ADMIN MENU =====\n";
@@ -234,7 +252,8 @@ int main()
 
       cout << "Enter Choice: ";
       cin >> adminChoice;
-
+      
+      
       // VIEW CLUBS
       if (adminChoice == 1)
       {
@@ -270,8 +289,9 @@ int main()
              << students[i].interestedclub << endl;
       }
       }
+      
       // REMOVE CLUB PLACEHOLDER
-      else if (adminChoice == 3)
+      else if  (adminChoice == 3)
       {
         cout << "Remove Club Feature Coming Soon!\n";
       }
@@ -283,6 +303,12 @@ int main()
       }
     }
 
+     else 
+      {
+        cout << "Acccess Denied!\n";
+      }
+    }
+  
     // EXIT PROGRAM
     else if (choice == 9)
     {
