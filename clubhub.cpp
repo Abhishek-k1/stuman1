@@ -29,6 +29,14 @@ public:
   string timing;     // Event timing
   string clubName;   // Related club name
 };
+
+class Attendance
+{
+  public:
+       string studentName;
+       string eventName;
+       string status;
+};
   string adminUsername = "admin";
   string adminPassword = "1234";
 
@@ -39,6 +47,7 @@ int main()
   vector<Student> students;          // object of student class
   string searchClub;  // variable for searching club
   vector<Event> events;            // Object  of Event class
+  vector<Attendance> attendanceList;
   int choice;         // Store menu choice
 
   while (true)
@@ -53,7 +62,9 @@ int main()
     cout << "6. Add Event\n";
     cout << "7. Display Events\n";
     cout << "8. Admin Menu\n";
-    cout << "9. Exit\n";
+    cout << "9. Mark Attendance\n";
+    cout  << "10. View Attendance\n";
+    cout << "11. Exit\n";
 
     cout << "Enter Choice: ";
     cin >> choice;      // user enters menu choice
@@ -309,8 +320,41 @@ int main()
       }
     }
   
+    else if(choice == 9)
+    {
+      Attendance a;
+
+      cout << "Enter Student Name: ";
+      cin.ignore();
+      getline(cin, a.studentName);
+
+      cout << "Enter Event Name: ";
+      getline(cin, a.eventName);
+
+      cout << "Enter Status (Present/Absent): ";
+      getline(cin, a.status);
+
+      attendanceList.push_back(a);
+
+      cout << "Attendance Marked Successfully!\n";
+    }
+
+    else if(choice == 10)
+    {
+      for(int i = 0; i , attendanceList.size(); i++)
+      {
+        cout << "\nStudent Name: "
+             << attendanceList[i].studentName << endl;
+
+        cout << "Event Name: "
+             << attendanceList[i].eventName << endl;
+
+        cout << "Status: "
+             << attendanceList[i].status << endl;
+      }
+    }
     // EXIT PROGRAM
-    else if (choice == 9)
+    else if (choice == 11)
     {
       cout << "\nThank You For Using ClubHub System!\n";
       break;
