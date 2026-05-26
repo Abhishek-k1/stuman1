@@ -95,6 +95,16 @@ int main()
     {
         for(int i = 0; i < clubs.size(); i++)
         {
+          for(int j = i + 1; j < clubs.size(); j++)
+          {
+            if(clubs[i].clubName > clubs[j].clubName)
+            {
+              swap(clubs[i], clubs[j]);
+            }
+          }
+        }
+        for(int i = 0; i < clubs.size(); i++)
+        {
           cout << "\nClub Name: "
                << clubs[i].clubName << endl;
 
@@ -104,6 +114,7 @@ int main()
           cout << "Coordinator:  "
                << clubs[i].coordinator << endl;
         }
+        
     }
 
   // STUDENT REGISTRATION
@@ -159,7 +170,9 @@ int main()
 
       for(int i = 0; i < clubs.size(); i++)
       {
-      if (searchClub == clubs[i].clubName)
+      if (searchClub == clubs[i].clubName ||
+          searchClub == clubs[i].category ||
+          searchClub == clubs[i].coordinator)
       {
         cout << "\nClub Found!\n";
 
