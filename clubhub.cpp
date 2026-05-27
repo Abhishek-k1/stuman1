@@ -78,6 +78,22 @@ int main()
       cin.ignore();                  // Clears newline from buffer
       getline(cin, c.clubName);      // Takes full line input
 
+      if(c.clubName.empty())
+      {
+        cout << "Club Name Cannot Be Empty!\n";
+        continue;
+      }
+
+      bool duplicate = false;
+
+      for(int i = 0; i < clubs.size(); i++)
+      {
+        if(c.clubName == clubs[i].clubName)
+        {
+          duplicate = true;
+        }
+      }
+
       cout << "Enter Club Category: ";
       cin >> c.category;
 
@@ -85,13 +101,19 @@ int main()
       cin.ignore();
       getline(cin, c.coordinator);
 
-      clubs.push_back(c);
+      if(duplicate == true)
+      {
+        cout << "Club Already Exists!\n";
+      }
+      else
+      {
+          clubs.push_back(c);
 
       cout << "Club Added Successfully!\n";
     }
-
+  }
     // Display CLUB FEATURE
-    else if (choice == 2)
+    else if(choice == 2)
     {
         for(int i = 0; i < clubs.size(); i++)
         {
@@ -124,6 +146,12 @@ int main()
       cout << "Enter Student Name: ";
       cin.ignore();
       getline(cin, s.studentName);
+
+      if(s.studentName.empty())
+      {
+        cout << "Student Name Cannot Be Empty!\n";
+        continue;
+      }
 
       cout << "Enter USN: ";
       cin >> s.usn;
@@ -205,6 +233,12 @@ int main()
       cin.ignore();
       getline(cin, e.eventName);
 
+      if(e.eventName.empty())
+      {
+        cout << "Event Name Cannot Be Empty!\n";
+        continue;
+      }
+
       cout << "Enter Venue: ";
       getline(cin, e.venue);
 
@@ -280,21 +314,20 @@ int main()
       
       // VIEW CLUBS
       if (adminChoice == 1)
-      {
-        ifstream file("clubs.txt");
-
-        string name, category, coordinator;
-
-        while (file >> name >> category >> coordinator)
+     {
+      for(int i = 0; i < clubs.size(); i++)
         {
-          cout << "\nClub Name: " << name << endl;
-          cout << "Category: " << category << endl;
-          cout << "Coordinator: " << coordinator << endl;
+            cout << "\nClub Name: "
+                 << clubs[i].clubName << endl;
+       
+            cout << "Category: "
+                 << clubs[i].category << endl;
+
+            cout << "Coordinator: "
+                 <<  clubs[i].coordinator << endl;
         }
-
-        file.close();
       }
-
+       
       // VIEW STUDENTS
       else if (adminChoice == 2)
       {
@@ -354,7 +387,7 @@ int main()
 
     else if(choice == 10)
     {
-      for(int i = 0; i , attendanceList.size(); i++)
+      for(int i = 0; i < attendanceList.size(); i++)
       {
         cout << "\nStudent Name: "
              << attendanceList[i].studentName << endl;
@@ -376,7 +409,7 @@ int main()
     // INVALID CHOICE
     else
     {
-      cout << "Invalid Choice! Please Try Again.\n";
+      cout << "Invalid Choice! Please Enter Between 1 to 11.\n";
     }
   }
 }
