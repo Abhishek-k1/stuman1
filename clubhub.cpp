@@ -40,6 +40,50 @@ class Attendance
   string adminUsername = "admin";
   string adminPassword = "1234";
 
+  void addClub(vector<Club> &clubs)
+  {
+    Club c;
+
+    cout << "Enter Club Name: ";
+    cin.ignore();
+    getline(cin, c.clubName);
+
+    if(c.clubName.empty())
+    {
+      cout << "Club Name Cannot Be Empty!\n";
+      return;
+    }
+    bool duplicate = false;
+
+    for(int i = 0; i < clubs.size();  i++)
+    {
+      if(c.clubName == clubs[i].clubName)
+      {
+        duplicate = true;
+        break;
+      }
+    }
+
+    cout  << "Enter Club Category: ";
+    cin >> c.category;
+
+    cout << "Enter Coordinator Name: ";
+    cin.ignore();
+    getline(cin, c.coordinator);
+
+    if(duplicate == true)
+    {
+      cout << "Club Alreeady Exists!\n";
+    }
+    else
+    {
+      clubs.push_back(c);
+
+      cout << "Club Added Successfully!\n";
+    }
+  }
+
+
 
 int main()
 {
@@ -72,45 +116,7 @@ int main()
     // ADD CLUB FEATURE
     if (choice == 1)
     {
-       Club c;
-
-      cout << "Enter Club Name: ";
-      cin.ignore();                  // Clears newline from buffer
-      getline(cin, c.clubName);      // Takes full line input
-
-      if(c.clubName.empty())
-      {
-        cout << "Club Name Cannot Be Empty!\n";
-        continue;
-      }
-
-      bool duplicate = false;
-
-      for(int i = 0; i < clubs.size(); i++)
-      {
-        if(c.clubName == clubs[i].clubName)
-        {
-          duplicate = true;
-        }
-      }
-
-      cout << "Enter Club Category: ";
-      cin >> c.category;
-
-      cout << "Enter Coordinator Name: ";
-      cin.ignore();
-      getline(cin, c.coordinator);
-
-      if(duplicate == true)
-      {
-        cout << "Club Already Exists!\n";
-      }
-      else
-      {
-          clubs.push_back(c);
-
-      cout << "Club Added Successfully!\n";
-    }
+      addClub(clubs);
   }
     // Display CLUB FEATURE
     else if(choice == 2)
