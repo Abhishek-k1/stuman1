@@ -1,98 +1,121 @@
-#include <iostream>    // For cout, cin
-#include <fstream>    // For file handling
+#include <iostream> // For cout, cin
+#include <fstream>  // For file handling
 #include <vector>
 
 using namespace std;
 
-class Club      // class for storing club details
+class Club // class for storing club details
 {
 public:
-  string clubName;   // stores club name
-  string category;   // stores club category
-  string coordinator;  // stores coordinator name 
+  string clubName;    // stores club name
+  string category;    // stores club category
+  string coordinator; // stores coordinator name
 };
 
 class Student
 {
 public:
-  string studentName;   // student name
-  string usn;           // student USN
-  string branch;        // student branch
-  string interestedclub;   // Interseted club
+  string studentName;    // student name
+  string usn;            // student USN
+  string branch;         // student branch
+  string interestedclub; // Interseted club
 };
 
-class Event      // class for storing event details
+class Event // class for storing event details
 {
 public:
-  string eventName;  // Event name
-  string venue;      // Event venue
-  string timing;     // Event timing
-  string clubName;   // Related club name
+  string eventName; // Event name
+  string venue;     // Event venue
+  string timing;    // Event timing
+  string clubName;  // Related club name
 };
 
 class Attendance
 {
-  public:
-       string studentName;
-       string eventName;
-       string status;
+public:
+  string studentName;
+  string eventName;
+  string status;
 };
-  string adminUsername = "admin";
-  string adminPassword = "1234";
+string adminUsername = "admin";
+string adminPassword = "1234";
 
-  void addClub(vector<Club> &clubs)
+void addClub(vector<Club> &clubs)
+{
+  Club c;
+
+  cout << "Enter Club Name: ";
+  cin.ignore();
+  getline(cin, c.clubName);
+
+  if (c.clubName.empty())
   {
-    Club c;
+    cout << "Club Name Cannot Be Empty!\n";
+    return;
+  }
+  bool duplicate = false;
 
-    cout << "Enter Club Name: ";
-    cin.ignore();
-    getline(cin, c.clubName);
-
-    if(c.clubName.empty())
+  for (int i = 0; i < clubs.size(); i++)
+  {
+    if (c.clubName == clubs[i].clubName)
     {
-      cout << "Club Name Cannot Be Empty!\n";
-      return;
-    }
-    bool duplicate = false;
-
-    for(int i = 0; i < clubs.size();  i++)
-    {
-      if(c.clubName == clubs[i].clubName)
-      {
-        duplicate = true;
-        break;
-      }
-    }
-
-    cout  << "Enter Club Category: ";
-    cin >> c.category;
-
-    cout << "Enter Coordinator Name: ";
-    cin.ignore();
-    getline(cin, c.coordinator);
-
-    if(duplicate == true)
-    {
-      cout << "Club Alreeady Exists!\n";
-    }
-    else
-    {
-      clubs.push_back(c);
-
-      cout << "Club Added Successfully!\n";
+      duplicate = true;
+      break;
     }
   }
 
+  cout << "Enter Club Category: ";
+  cin >> c.category;
 
+  cout << "Enter Coordinator Name: ";
+  cin.ignore();
+  getline(cin, c.coordinator);
+
+  if (duplicate == true)
+  {
+    cout << "Club Alreeady Exists!\n";
+  }
+  else
+  {
+    clubs.push_back(c);
+
+    cout << "Club Added Successfully!\n";
+  }
+}
+ void displayClub(vector<Club> &clubs)
+    {
+      for (int i = 0; i < clubs.size(); i++)
+      {
+        for (int j = i + 1; j < clubs.size(); j++)
+        {
+          if (clubs[i].clubName > clubs[j].clubName)
+          {
+            swap(clubs[i], clubs[j]);
+          }
+        }
+      }
+
+      for (int i = 0; i < clubs.size(); i++)
+      {
+        cout << "\nClub Name: "
+             << clubs[i].clubName << endl;
+
+        cout << "Category: "
+             << clubs[i].category << endl;
+
+        cout << "Coordinator: "
+             << clubs[i].coordinator << endl;
+      }
+    }
 
 int main()
 {
-  vector<Club> clubs;             // Object of Club class
-  vector<Student> students;          // object of student class
-  string searchClub;  // variable for searching club
-  vector<Event> events;            // Object  of Event class
+  vector<Club> clubs;       // Object of Club class
+  vector<Student> students; // object of student class
+  string searchClub;        // variable for searching club
+  vector<Event> events;     // Object  of Event class
   vector<Attendance> attendanceList;
-  int choice;         // Store menu choice
+  int choice; // Store menu choice
 
   while (true)
   {
@@ -107,45 +130,25 @@ int main()
     cout << "7. Display Events\n";
     cout << "8. Admin Menu\n";
     cout << "9. Mark Attendance\n";
-    cout  << "10. View Attendance\n";
+    cout << "10. View Attendance\n";
     cout << "11. Exit\n";
 
     cout << "Enter Choice: ";
-    cin >> choice;      // user enters menu choice
+    cin >> choice; // user enters menu choice
 
     // ADD CLUB FEATURE
     if (choice == 1)
     {
       addClub(clubs);
-  }
-    // Display CLUB FEATURE
-    else if(choice == 2)
-    {
-        for(int i = 0; i < clubs.size(); i++)
-        {
-          for(int j = i + 1; j < clubs.size(); j++)
-          {
-            if(clubs[i].clubName > clubs[j].clubName)
-            {
-              swap(clubs[i], clubs[j]);
-            }
-          }
-        }
-        for(int i = 0; i < clubs.size(); i++)
-        {
-          cout << "\nClub Name: "
-               << clubs[i].clubName << endl;
-
-          cout << "Category: "
-               << clubs[i].category << endl;
-
-          cout << "Coordinator:  "
-               << clubs[i].coordinator << endl;
-        }
-        
     }
 
-  // STUDENT REGISTRATION
+    // Display CLUB FEATURE
+    else if (choice == 2)
+    {
+       displayClub(clubs);
+    }
+
+    // STUDENT REGISTRATION
     else if (choice == 3)
     {
       Student s;
@@ -153,7 +156,7 @@ int main()
       cin.ignore();
       getline(cin, s.studentName);
 
-      if(s.studentName.empty())
+      if (s.studentName.empty())
       {
         cout << "Student Name Cannot Be Empty!\n";
         continue;
@@ -177,21 +180,21 @@ int main()
     // DISPLAY STUDENT DETAILS
     else if (choice == 4)
     {
-      for(int i = 0; i < students.size(); i++)
+      for (int i = 0; i < students.size(); i++)
       {
-         cout << "\nStudent Name: " 
-               << students[i].studentName << endl;
+        cout << "\nStudent Name: "
+             << students[i].studentName << endl;
 
-         cout << "USN: "
-               << students[i].usn << endl;
+        cout << "USN: "
+             << students[i].usn << endl;
 
-         cout << "Branch: " 
-               << students[i].branch << endl;
+        cout << "Branch: "
+             << students[i].branch << endl;
 
-         cout << "Interested Club: " 
-              << students[i].interestedclub << endl;
+        cout << "Interested Club: "
+             << students[i].interestedclub << endl;
+      }
     }
-  }
 
     // SEARCH CLUB FEATURE
     else if (choice == 5)
@@ -202,28 +205,27 @@ int main()
       cin.ignore();
       getline(cin, searchClub);
 
-      for(int i = 0; i < clubs.size(); i++)
+      for (int i = 0; i < clubs.size(); i++)
       {
-      if (searchClub == clubs[i].clubName ||
-          searchClub == clubs[i].category ||
-          searchClub == clubs[i].coordinator)
-      {
-        cout << "\nClub Found!\n";
+        if (searchClub == clubs[i].clubName ||
+            searchClub == clubs[i].category ||
+            searchClub == clubs[i].coordinator)
+        {
+          cout << "\nClub Found!\n";
 
-        cout << "Club Name: "
-             << clubs[i].clubName << endl;
+          cout << "Club Name: "
+               << clubs[i].clubName << endl;
 
-        cout << "Category: " 
-             << clubs[i].category << endl;
+          cout << "Category: "
+               << clubs[i].category << endl;
 
-        cout << "Coordinator: " 
-             << clubs[i].coordinator << endl;
-        
-             found = true;
+          cout << "Coordinator: "
+               << clubs[i].coordinator << endl;
 
-            }
-          }
-          if(found == false)
+          found = true;
+        }
+      }
+      if (found == false)
       {
         cout << "Club Not Found!\n";
       }
@@ -239,7 +241,7 @@ int main()
       cin.ignore();
       getline(cin, e.eventName);
 
-      if(e.eventName.empty())
+      if (e.eventName.empty())
       {
         cout << "Event Name Cannot Be Empty!\n";
         continue;
@@ -276,7 +278,7 @@ int main()
 
       string eventName, venue, timing, clubName;
 
-    // Reads event details from file
+      // Reads event details from file
       while (file >> eventName >> venue >> timing >> clubName)
       {
         cout << "\nEvent Name: " << eventName << endl;
@@ -299,80 +301,78 @@ int main()
 
       cout << "Enter Password: ";
       cin >> password;
-   
-      if(username == adminUsername &&
-         password == adminPassword)
+
+      if (username == adminUsername &&
+          password == adminPassword)
       {
         cout << "\nLogin Successful!\n";
-      
-      
-      int adminChoice;
 
-      cout << "\n===== ADMIN MENU =====\n";
-      cout << "1. View Clubs\n";
-      cout << "2. View Students\n";
-      cout << "3. Remove Club\n";
-      cout << "4. Back\n";
+        int adminChoice;
 
-      cout << "Enter Choice: ";
-      cin >> adminChoice;
-      
-      
-      // VIEW CLUBS
-      if (adminChoice == 1)
-     {
-      for(int i = 0; i < clubs.size(); i++)
+        cout << "\n===== ADMIN MENU =====\n";
+        cout << "1. View Clubs\n";
+        cout << "2. View Students\n";
+        cout << "3. Remove Club\n";
+        cout << "4. Back\n";
+
+        cout << "Enter Choice: ";
+        cin >> adminChoice;
+
+        // VIEW CLUBS
+        if (adminChoice == 1)
         {
+          for (int i = 0; i < clubs.size(); i++)
+          {
             cout << "\nClub Name: "
                  << clubs[i].clubName << endl;
-       
+
             cout << "Category: "
                  << clubs[i].category << endl;
 
             cout << "Coordinator: "
-                 <<  clubs[i].coordinator << endl;
+                 << clubs[i].coordinator << endl;
+          }
+        }
+
+        // VIEW STUDENTS
+        else if (adminChoice == 2)
+        {
+          for (int i = 0; i < students.size(); i++)
+          {
+            cout << "\nStudent Name: "
+                 << students[i].studentName << endl;
+
+            cout << "USN: "
+                 << students[i].usn << endl;
+
+            cout << "Branch: "
+                 << students[i].branch << endl;
+
+            cout << "Interested Club: "
+                 << students[i].interestedclub << endl;
+          }
+        }
+
+        // REMOVE CLUB PLACEHOLDER
+        else if (adminChoice == 3)
+        {
+          cout << "Remove Club Feature Coming Soon!\n";
+        }
+
+        // RETURN TO MAIN MENU
+        else if (adminChoice == 4)
+        {
+          cout << "Returning to Main Menu...\n";
         }
       }
-       
-      // VIEW STUDENTS
-      else if (adminChoice == 2)
-      {
-        for(int i = 0; i < students.size(); i++)
-        {
-          cout << "\nStudent Name: "
-               << students[i].studentName << endl;
 
-        cout << "USN: " 
-             << students[i].usn << endl;
-
-        cout << "Branch: " 
-            << students[i].branch << endl;
-            
-        cout << "Interested Club: "
-             << students[i].interestedclub << endl;
-      }
-      }
-      
-      // REMOVE CLUB PLACEHOLDER
-      else if  (adminChoice == 3)
-      {
-        cout << "Remove Club Feature Coming Soon!\n";
-      }
-
-      // RETURN TO MAIN MENU
-      else if (adminChoice == 4)
-      {
-        cout << "Returning to Main Menu...\n";
-      }
-    }
-
-     else 
+      else
       {
         cout << "Acccess Denied!\n";
       }
     }
-  
-    else if(choice == 9)
+
+    else if (choice == 9)
     {
       Attendance a;
 
@@ -391,9 +391,9 @@ int main()
       cout << "Attendance Marked Successfully!\n";
     }
 
-    else if(choice == 10)
+    else if (choice == 10)
     {
-      for(int i = 0; i < attendanceList.size(); i++)
+      for (int i = 0; i < attendanceList.size(); i++)
       {
         cout << "\nStudent Name: "
              << attendanceList[i].studentName << endl;
