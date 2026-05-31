@@ -108,6 +108,26 @@ void addClub(vector<Club> &clubs)
       }
     }
 
+    void dashboard(vector<Club> &clubs,
+                   vector<Student> &students,
+                   vector<Event> &events,
+                   vector<Attendance> &attendanceList)
+    {
+      cout << "\n============= CLUB DASHBOARD ===============\n";
+
+      cout << "Total Clubs: "
+           << clubs.size() << endl;
+
+      cout << "Total Students: "
+           << students.size() << endl;
+
+      cout << "Total Events: "
+           << events.size() << endl;
+
+      cout << "Total Attendance Records: "
+           << attendanceList.size() << endl;
+    }
+
 int main()
 {
   vector<Club> clubs;       // Object of Club class
@@ -131,7 +151,8 @@ int main()
     cout << "8. Admin Menu\n";
     cout << "9. Mark Attendance\n";
     cout << "10. View Attendance\n";
-    cout << "11. Exit\n";
+    cout << "11. Dashboard\n";
+    cout << "12. Exit\n";
 
     cout << "Enter Choice: ";
     cin >> choice; // user enters menu choice
@@ -405,8 +426,13 @@ int main()
              << attendanceList[i].status << endl;
       }
     }
+
+    else if(choice == 11)
+    {
+      dashboard(clubs, students, events, attendanceList);
+    }
     // EXIT PROGRAM
-    else if (choice == 11)
+    else if (choice == 12)
     {
       cout << "\nThank You For Using ClubHub System!\n";
       break;
@@ -415,7 +441,7 @@ int main()
     // INVALID CHOICE
     else
     {
-      cout << "Invalid Choice! Please Enter Between 1 to 11.\n";
+      cout << "Invalid Choice! Please Enter Between 1 to 12.\n";
     }
   }
 }
